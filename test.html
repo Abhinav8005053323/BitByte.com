@@ -1,121 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three Image Slider</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
-
-        .slider {
-            position: relative;
-            max-width: 800px;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .slides {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .slide {
-            min-width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0.5;
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-        }
-
-        .slide img {
-            width: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        .active {
-            transform: scale(1.1);
-            opacity: 1;
-        }
-
-        .controls {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            justify-content: space-between;
-            width: 100px;
-        }
-
-        .controls .prev, .controls .next {
-            background-color: rgba(0,0,0,0.5);
-            color: white;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 50%;
-            user-select: none;
-            margin: 0 5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" media="screen and (max-width: 1192px)" href="/css/phone.css">
+  <link rel="stylesheet" media="screen and (min-width: 1190px)" href="/css/tab.css">
+  <link rel="shortcut icon" href="images/B_logo Original_prev_ui.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <script src="/Javascript/script.js"></script>
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  <title>Learn to code - Bubbles</title>
 </head>
-<body>
-    <div class="slider">
-        <div class="slides">
-            <div class="slide"><img src="https://via.placeholder.com/800x400?text=Slide+1" alt="Slide 1"></div>
-            <div class="slide"><img src="https://via.placeholder.com/600x300?text=Slide+2" alt="Slide 2"></div>
-            <div class="slide"><img src="https://via.placeholder.com/600x300?text=Slide+3" alt="Slide 3"></div>
-        </div>
-        <div class="controls">
-            <span class="prev" onclick="changeSlide(-1)">&#10094;</span>
-            <span class="next" onclick="changeSlide(1)">&#10095;</span>
-        </div>
+<style>
+  body {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+  nav {
+    z-index: 9;
+  }
+  .container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    padding-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .post {
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #dfdfdf;
+  }
+  .post-content {
+    padding: 20px;
+    background: #dfdfdf;
+  }
+  .post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  }
+  .post img {
+    display: none;
+  }
+  .post h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: black;
+  }
+  .post .date {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.568);
+  }
+  .post p {
+    color: #000000a9;
+    line-height: 1.5;
+    font-size: 16px;
+  }
+  p.date {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #838383 !important;
+  }
+  @media only screen and (max-width: 800px) {
+    .container {
+      width: 90%;
+    }
+    .post h2 {
+      font-size: 20px;
+    }
+  }
+</style>
+
+<body class="body">
+  <div class="whole-navbar">
+    <div class="nav">
+      <div class="navbar">
+        <a style="text-decoration: none;" href="">
+          <h1 style="color: #4299e1;">Bubbles.com</h1>
+        </a>
+        <ul class="navbar-ul">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/services/services.html">Services</a></li>
+          <li><a href="/contact/contact.html">Contact</a></li>
+          <li><a href="/aboutus/about.html">About us</a></li>
+          <li><a href="/Blogs/blog.html">Blog</a></li>
+          <li><a href="/Notes/notes.html">Notes</a></li>
+          <li><a href="/WorkWithUs/work.html">Work with us</a></li>
+          <li><span style="color: white; cursor: pointer;" onclick="darkmode()" id="darkmode" class="material-symbols-outlined">dark_mode</span></li>
+          <li><span style="color: white; cursor: pointer;" onclick="yellowmode()" id="darkmode" class="material-symbols-outlined">light_mode</span></li>
+          <li><button><a href="/contact/contact.html">Login / Signup</a></button></li>
+        </ul>
+      </div>
     </div>
+    <div class="burger">
+      <div class="phone_burger" style="display: flex;">
+        <span id="burger1" style="position: relative; right: 40px;z-index: 9;" class="material-symbols-outlined">search</span>
+        <span id="burger1" style="position: relative; right: 20px;z-index: 9;" onclick="burger()" class="material-symbols-outlined">lunch_dining</span>
+      </div>
+    </div>
+    <div class="after-nav">
+      <a href="/index.html"><span id="home_icon" class="material-symbols-outlined">home_app_logo</span></a>
+      <ul>
+        <a href="">
+          <li class="after_nav_ul_li">HTML</li>
+        </a>
+        <a href="">
+          <li class="after_nav_ul_li">CSS</li>
+        </a>
+        <a href="">
+          <li class="after_nav_ul_li">Javascript</li>
+        </a>
+        <a href="">
+          <li class="after_nav_ul_li">PYTHON</li>
+        </a>
+        <a href="">
+          <li class="after_nav_ul_li">C</li>
+        </a>
+        <a href="">
+          <li class="after_nav_ul_li">C++</li>
+        </a>
+        <a href="">
+          <li class="after_nav_ul_li">JAVA</li>
+        </a>
+        <div class="search">
+          <input type="search" name="" id="" placeholder="Search Here">
+        </div>
+      </ul>
+      <span id="search" class="material-symbols-outlined">search</span>
+    </div>
+    <hr id="hr">
+  </div>
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="loader"></div>
+  </div>
+  <div style="width: 100%; height: 50px;"></div>
+  <div class="container" id="posts">
+    <!-- Blog posts will be displayed here -->
+  </div>
 
-    <script>
-        let currentIndex = 0;
+  <footer class="text-gray-600 body-font">
+    <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+      <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+        <img alt="testimonial" src="/images/logu.png" class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+        <span class="ml-3 text-xl" style="color: black;">BUBBLES.COM</span>
+      </a>
+      <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2023-24 Bubbles.com —
+        <a href="https://www.instagram.com/abu_jandal_____7/" class="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@abu_jandal</a>
+      </p>
+      <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+        <a class="text-gray-500">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-500">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+            <path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0016.11 2c-2.64 0-4.78 2.17-4.78 4.84 0 .38.04.75.12 1.11A13.57 13.57 0 013 4.1a4.81 4.81 0 001.48 6.45 4.41 4.41 0 01-2.16-.6v.06c0 2.28 1.61 4.18 3.75 4.6a4.52 4.52 0 01-2.15.08 4.48 4.48 0 004.19 3.13A9 9 0 013 19.54 12.8 12.8 0 009.29 21c7.55 0 11.67-6.44 11.67-12.02 0-.18-.01-.35-.02-.53A8.18 8.18 0 0023 3z"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-500">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
+            <path d="M17.5 6.5h.01"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-500">
+          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+            <path stroke="none" d="M16 8a6 6 0 00-9.33-5H6.41A2.41 2.41 0 004 5.41v13.18A2.41 2.41 0 006.41 21h11.18A2.41 2.41 0 0020 18.59V7.33A6 6 0 0016 8zm-3.5 1.5H8v-3h4.5z"></path>
+          </svg>
+        </a>
+      </span>
+    </div>
+  </footer>
 
-        function showSlide(index) {
-            const slides = document.querySelectorAll('.slide');
-            const totalSlides = slides.length;
+  <script>
+    const posts = [
+      {
+        title: 'Intro to HTML',
+        date: 'May 20, 2023',
+        summary: 'Learn the basics of HTML, the essential language for creating web pages.',
+        content: 'HTML stands for HyperText Markup Language. It is the standard language for creating web pages. HTML describes the structure of a web page using markup. Elements are represented by tags. HTML elements are the building blocks of HTML pages. Learning HTML is the first step towards web development...'
+      },
+      {
+        title: 'Getting Started with CSS',
+        date: 'June 15, 2023',
+        summary: 'CSS is used to style and layout web pages. Discover how to get started with CSS.',
+        content: 'CSS stands for Cascading Style Sheets. It is used to control the style and layout of web pages. CSS allows you to apply styles to HTML elements, such as color, font, and spacing. By using CSS, you can create visually appealing and responsive web designs. Understanding CSS is crucial for web developers...'
+      },
+      {
+        title: 'JavaScript for Beginners',
+        date: 'July 10, 2023',
+        summary: 'JavaScript is a powerful scripting language. Start learning the basics of JavaScript today.',
+        content: 'JavaScript is a programming language that allows you to implement complex features on web pages. It is an essential technology alongside HTML and CSS. With JavaScript, you can create interactive and dynamic web pages. It is widely used in web development and is supported by all modern web browsers...'
+      }
+    ];
 
-            if (index >= totalSlides) {
-                currentIndex = 0;
-            } else if (index < 0) {
-                currentIndex = totalSlides - 1;
-            } else {
-                currentIndex = index;
-            }
+    function createPostElement(post) {
+      const postElement = document.createElement('div');
+      postElement.className = 'post';
+      postElement.innerHTML = `
+        <div class="post-content">
+          <h2>${post.title}</h2>
+          <p class="date">${post.date}</p>
+          <p>${post.summary}</p>
+          <button class="read-more">Read More</button>
+          <p class="full-content" style="display:none;">${post.content}</p>
+        </div>
+      `;
 
-            // Reset all slides
-            slides.forEach((slide, idx) => {
-                slide.classList.remove('active');
-                if (idx === currentIndex) {
-                    slide.classList.add('active');
-                }
-            });
+      const readMoreButton = postElement.querySelector('.read-more');
+      const fullContent = postElement.querySelector('.full-content');
 
-            // Set transform to center the active slide
-            const slideWidth = slides[0].clientWidth;
-            const offset = -currentIndex * slideWidth;
-            document.querySelector('.slides').style.transform = `translateX(${offset}px)`;
+      readMoreButton.addEventListener('click', () => {
+        if (fullContent.style.display === 'none') {
+          fullContent.style.display = 'block';
+          readMoreButton.textContent = 'Read Less';
+        } else {
+          fullContent.style.display = 'none';
+          readMoreButton.textContent = 'Read More';
         }
+      });
 
-        function changeSlide(direction) {
-            showSlide(currentIndex + direction);
-        }
+      return postElement;
+    }
 
-        // Initialize the slider
-        showSlide(currentIndex);
-    </script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const postsContainer = document.getElementById('posts');
+      posts.forEach(post => {
+        const postElement = createPostElement(post);
+        postsContainer.appendChild(postElement);
+      });
+    });
+  </script>
 </body>
+
 </html>
